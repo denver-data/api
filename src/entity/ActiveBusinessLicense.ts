@@ -37,7 +37,7 @@ export class ActiveBusinessLicense {
 
     @Field()
     @Column({
-        type: "date",
+        type: "timestamp",
         name: "expiration_date",
     })
     expirationDate: Date;

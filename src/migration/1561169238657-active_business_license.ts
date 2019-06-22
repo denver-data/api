@@ -32,7 +32,7 @@ export class activeBusinessLicense1561169238657 implements MigrationInterface {
                     },
                     {
                         name: "expiration_date",
-                        type: "date",
+                        type: "timestamp",
                     },
                     {
                         name: "entity_name",
