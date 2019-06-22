@@ -1,17 +1,18 @@
 import "reflect-metadata";
+
 import { createConnection, getRepository } from "typeorm";
 import { ActiveBusinessLicenseResolver } from "../resolvers/ActiveBusinessLicenseResolver";
 import * as TypeGraphQL from "type-graphql";
 import { ApolloServer } from "apollo-server";
-import { ActiveBusinessLicense } from "../entity/ActiveBusinessLicense";
 
 async function run() {
     try {
         const connection = await createConnection()
         const schema = await TypeGraphQL.buildSchema({
+            validate: false,
             resolvers: [
                 ActiveBusinessLicenseResolver
-            ]
+            ],
         });
         const server = new ApolloServer({ schema });
         const { url } = await server.listen(4000);
