@@ -50,6 +50,7 @@ createConnection()
         try {
             let updated = await activeBusinessLicenseImport()
             console.log(`INSERTED ${updated} rows`);
+            //TODO(dannyfritz): Update the update_log table
         } catch (error) {
             console.error(error);
         }

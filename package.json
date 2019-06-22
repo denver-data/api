@@ -21,7 +21,6 @@
    },
    "scripts": {
       "start": "ts-node src/api/index.ts",
-      "import": "ts-node src/import/index.ts",
       "import:active-business-license": "ts-node src/import/ActiveBusinessLicenseImport.ts",
       "db:create-migration": "typeorm migration:create -n ",
       "db:migrate": "ts-node ./node_modules/typeorm/cli.js migration:run",

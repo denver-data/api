@@ -1,7 +1,7 @@
 import "reflect-metadata";
 
-import { createConnection, getRepository } from "typeorm";
-import { ActiveBusinessLicenseResolver } from "../resolvers/ActiveBusinessLicenseResolver";
+import { createConnection } from "typeorm";
+import { ActiveBusinessLicenseResolver } from "../resolver/ActiveBusinessLicenseResolver";
 import * as TypeGraphQL from "type-graphql";
 import { ApolloServer } from "apollo-server";
 
