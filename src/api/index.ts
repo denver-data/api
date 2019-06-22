@@ -1,8 +1,24 @@
 import "reflect-metadata";
-import { createConnection } from "typeorm";
+import { createConnection, getRepository } from "typeorm";
+import { ActiveBusinessLicenseResolver } from "../resolvers/ActiveBusinessLicenseResolver";
+import * as TypeGraphQL from "type-graphql";
+import { ApolloServer } from "apollo-server";
+import { ActiveBusinessLicense } from "../entity/ActiveBusinessLicense";
 
-createConnection()
-    .then(async connection => {
-        console.log("Here you can setup and run express/koa/any other framework.");
-    })
-    .catch(error => console.log(error));
+async function run() {
+    try {
+        const connection = await createConnection()
+        const schema = await TypeGraphQL.buildSchema({
+            resolvers: [
+                ActiveBusinessLicenseResolver
+            ]
+        });
+        const server = new ApolloServer({ schema });
+        const { url } = await server.listen(4000);
+        console.log(`Server is running, GraphQL Playground available at ${url}`);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+run();
