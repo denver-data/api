@@ -1,4 +1,4 @@
-# Awesome Project Build with TypeORM
+# Database, CSV importer, and GraphQL for denverdata.org
 
 Steps to run this project:
 
