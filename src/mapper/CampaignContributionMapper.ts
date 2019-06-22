@@ -4,7 +4,7 @@ import * as _ from "lodash";
 export function campaignContributionRowToEntity(row): CampaignContribution {
     const entity = new CampaignContribution();
     const data = _.flatten(Object.keys(row).map(k => row[k]));
-    if (row.__parsed_extra) {
+    if (row.__parsed_extra && row.__parsed_extra.length > 4) {
         throw new Error(data.join(","));
     }
     entity.date = row["Date"];

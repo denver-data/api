@@ -82,14 +82,6 @@ export class CampaignContributions1557097153886 implements MigrationInterface {
             }),
             true
         )
-
-        await queryRunner.addColumn(
-            "last_updated",
-            new TableColumn({
-                name: "campaign_contribution_rows_added",
-                type: "int"
-            })
-        );
     }
 
     public async down(queryRunner: QueryRunner): Promise<any> {

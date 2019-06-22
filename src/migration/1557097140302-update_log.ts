@@ -4,19 +4,22 @@ export class LastUpdated1557097140302 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<any> {
         await queryRunner.createTable(new Table({
-            name: "last_updated",
+            name: "update_log",
             columns: [
                 {
-                    name: "date",
+                    name: "entity",
+                    type: "text",
+                },
+                {
+                    name: "created",
                     type: "date",
-                    isPrimary: true,
                 },
             ]
         }), true)
     }
 
     public async down(queryRunner: QueryRunner): Promise<any> {
-        await queryRunner.dropTable("last_updated");
+        await queryRunner.dropTable("update_log");
     }
 
 }
