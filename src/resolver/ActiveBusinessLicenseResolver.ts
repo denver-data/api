@@ -2,13 +2,15 @@ import { Resolver, Query, Args } from "type-graphql";
 import { Repository, getRepository } from "typeorm";
 import { ActiveBusinessLicense } from "../entity/ActiveBusinessLicense";
 import { GetActiveBusinessLicenseArgs } from "./args/GetActiveBusinessLicenseArgs";
+import { Location, normalizeAddress } from "../entity/Location";
 
 @Resolver(ActiveBusinessLicense)
 export class ActiveBusinessLicenseResolver {
     private readonly activeBusinessLicenseRepository: Repository<ActiveBusinessLicense> = getRepository(ActiveBusinessLicense)
+    private readonly locationRepository: Repository<Location> = getRepository(Location)
 
     @Query(returns => [ActiveBusinessLicense])
-    activeBusinessLicenses(
+    async activeBusinessLicenses(
         @Args() { licenseType, licenseStatus }: GetActiveBusinessLicenseArgs
     ): Promise<ActiveBusinessLicense[]> {
         const query = this.activeBusinessLicenseRepository
@@ -19,6 +21,18 @@ export class ActiveBusinessLicenseResolver {
         if (licenseType) {
             query.where("abl.license_type = :licenseType", { licenseType })
         }
-        return query.getMany();
+        const abls = await query.getMany();
+        return Promise.all(abls
+            .map(async abl => {
+                const location = await this.locationRepository.findOne({
+                    address: normalizeAddress(abl.establishmentAddress),
+                });
+                if (!location) {
+                    return abl;
+                }
+                abl.latitude = location.latitude;
+                abl.longitude = location.longitude;
+                return abl;
+            }));
     }
 }

@@ -56,4 +56,10 @@ export class ActiveBusinessLicense {
         name: "establishment_address"
     })
     establishmentAddress: string;
+
+    @Field()
+    longitude: number;
+
+    @Field()
+    latitude: number;
 }
