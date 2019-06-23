@@ -56,5 +56,4 @@ export class ActiveBusinessLicense {
         name: "establishment_address"
     })
     establishmentAddress: string;
-
 }
