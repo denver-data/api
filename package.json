@@ -2,7 +2,7 @@
    "name": "denverdata-db",
    "description": "The data behind denverdata.org",
    "version": "0.0.1",
-   "repository": "https://github.com/denver-data/db",
+   "repository": "https://github.com/denver-data/api",
    "license": "MIT",
    "dependencies": {
       "@google/maps": "^0.5.5",
