@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+- 12.4.0
+deploy:
+  provider: heroku
+  app:
+    master: denver-data-api
+  run:
+    - npm run db:migrate
+  api_key:
+    secure: C50ArSOAIg5xvCmf5oqpROLMX3hiIUzqaD9ecSIy6a6dB6NXB9jLjIlZHhQYVaMnb3WN2s+FZlglROzDW+1gkWtSA8d4dGbO/jvq4H3Xrxk2WVSUrZZvOuKtqbweD4/bW01Exw1jk/oP5Cpg7d422RvQmbyxQaUrI1Mk8va5UwTlD7kUj3QUeCWl+Wwc385k/iOzTZ23XzP9QuzUFg26OCxU/5UqslVtOJ3q/g0JIh6l8DuJH0cD0NqiI79psrIpVd23uwtFRHXVg7WHc9pokWVOryC7snxmeAbmXipPJ513aliKYKYPLf2QZ5kgHDCcHYjipMyTOqCzx5CUjH4m54jDmIumYb6dtrLWAjP7KL6JxRzC8IkAoZUWLzfZjGCwcvKYAGWg0T5VVa8oTgpLm7SuoOkjdz3xPrIXBYl7TBLc30QmG6kmtBoSl+y2+KoNpKTABlGTuMd3N6uwE5W/Ih4ntz0ZfcLttdwknP0FaWHzRPRyAnnzSfdFpTIEWkejhEpFJ1FOH0X9PO29pJWzO+IuB8glFHo7F6fRqK+qJ9TH7GV57VGj9bYNAWCSAbO6p1NMEmlFa8Sl0mPCThaIfyV4heeDY9m7MwmxC6F3TaMLMlwoalPsPQY2fb2X9f3UcVU3Sa8Ly57DBKwibPzf/FP/PWtQBBMqIQcMF9Jt4fw=
