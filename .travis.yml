@@ -1,6 +1,11 @@
 language: node_js
 node_js:
-- 12.4.0
+  - 12.4.0
+
+branches:
+  only:
+  - master
+
 deploy:
   provider: heroku
   app:
