@@ -5,11 +5,11 @@ import { ActiveBusinessLicenseResolver } from "../resolver/ActiveBusinessLicense
 import * as TypeGraphQL from "type-graphql";
 import { ApolloServer } from "apollo-server";
 
-const env = process.env.NODE_ENV || "development";
+const port = process.env.PORT || 4000;
 
 async function run() {
     try {
-        const connection = await createConnection(env);
+        const connection = await createConnection();
         const schema = await TypeGraphQL.buildSchema({
             validate: false,
             resolvers: [
@@ -17,7 +17,7 @@ async function run() {
             ],
         });
         const server = new ApolloServer({ schema });
-        const { url } = await server.listen(4000);
+        const { url } = await server.listen(port);
         console.log(`Server is running, GraphQL Playground available at ${url}`);
     } catch (error) {
         console.error(error);
