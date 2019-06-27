@@ -10,7 +10,5 @@ deploy:
   provider: heroku
   app:
     master: denver-data-api
-  run:
-    - npm run db:migrate || travis_terminate 1;
   api_key:
     secure: fCEL4KdPum13MtQCo1EVTf/pnszLTMtvQwNd3Rz6cVR/LlzQv96uQn8y2flJ9rHc4n1IpClB9qlgFO6ChiZED3omVhvw08AxFj3/YLctbmU6DulJQ+8aohXV9DDA8HxWZctvNoRTGG35zG0CN/1/0HGyc52ZhVrSZD/UiEPqUBawnNBPW3uyR54KOE2YKIoHeWc5z/LXxUAwy7tvAvYw8XcETvmhk9q1uRECHPUMn4LPnynzsp2TsHt2XWjvObKxF3Vn24lBIEWHtBJn7/Jm6bjOhuYV6wNhXsCtehpcFNHvmXZ38cTg8PM4nMwTpt8bSgFPiCyN+0fCeNzCXX78I+1TpdGit1hKaBtiVRRT8i49MTz0w7EPlSG7Rkq65YyOx8s91cwqPcMLs3K+bpJywCohsPVdZSWfltAgq8cKBfrgX5tJQZzQlrCK5m9UIWbN/mKLRvvPc8Umvtv//2yuBff+9aorYrnAEr/Ya0BVSUL6O+pF0fpzeOe/JHEMnl1HPLUJtmJ+GAEgzb3IM2N/pFgJeFEh+r8aYcAsrRWZ8JjTV56PsMxC+n+70F4uzEUtorhIjlWkLMMHZGGggisMA5+tCRKG0d3PZ2Ozz3WHotYBSY+5CsC8bvlWzXiqV79rKdtCmlwV3xR25et1f3lyy0Rkf8q0P6ers5r5+dYl6hg=
