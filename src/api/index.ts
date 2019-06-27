@@ -5,9 +5,11 @@ import { ActiveBusinessLicenseResolver } from "../resolver/ActiveBusinessLicense
 import * as TypeGraphQL from "type-graphql";
 import { ApolloServer } from "apollo-server";
 
+const env = process.env.NODE_ENV || "development";
+
 async function run() {
     try {
-        const connection = await createConnection()
+        const connection = await createConnection(env);
         const schema = await TypeGraphQL.buildSchema({
             validate: false,
             resolvers: [
