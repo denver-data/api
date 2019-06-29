@@ -16,7 +16,7 @@ async function run() {
                 ActiveBusinessLicenseResolver
             ],
         });
-        const server = new ApolloServer({ schema });
+        const server = new ApolloServer({ cors: { origin: "https://denverdata.org" }, schema });
         const { url } = await server.listen(port);
         console.log(`Server is running, GraphQL Playground available at ${url}`);
     } catch (error) {
