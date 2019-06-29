@@ -6,7 +6,7 @@ import * as TypeGraphQL from "type-graphql";
 import { ApolloServer } from "apollo-server";
 
 const port = process.env.PORT || 4000;
-const cors = process.env.NODE_ENV === "production" ? { origin: "https://denverdata.org" } : true;
+const cors = process.env.NODE_ENV === "production" ? { origin: "https://denverdata.org" } : { origin: "*" };
 
 async function run() {
     try {
