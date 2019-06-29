@@ -6,6 +6,7 @@ import * as TypeGraphQL from "type-graphql";
 import { ApolloServer } from "apollo-server";
 
 const port = process.env.PORT || 4000;
+const cors = process.env.NODE_ENV === "production" ? { origin: "https://denverdata.org" } : true;
 
 async function run() {
     try {
@@ -16,7 +17,7 @@ async function run() {
                 ActiveBusinessLicenseResolver
             ],
         });
-        const server = new ApolloServer({ cors: { origin: "https://denverdata.org" }, schema });
+        const server = new ApolloServer({ cors, schema });
         const { url } = await server.listen(port);
         console.log(`Server is running, GraphQL Playground available at ${url}`);
     } catch (error) {

@@ -23,6 +23,7 @@ async function geocodeAddress(address: string): Promise<Location> {
     if (cachedLocation) {
         return cachedLocation;
     }
+    console.log(`New Location: ${address}.`);
     return new Promise<Location>((resolve, reject) => {
         googleMapsClient.geocode({
             address
@@ -37,10 +38,12 @@ async function geocodeAddress(address: string): Promise<Location> {
                 location.latitude = geometry.lat;
                 location.longitude = geometry.lng;
                 locationRepo.insert(location)
-                // console.log(`New Location: ${location.address} ${location.latitude} ${location.longitude}.`);
-                resolve(location);
+                .then(() => {
+                    console.log(`Cached Location: ${location.address} ${location.latitude} ${location.longitude}.`);
+                    resolve(location);
+                });
             } else {
-                console.error(err);
+                console.error(`ERROR: ${address} = `, err);
                 reject(err);
             }
         });
