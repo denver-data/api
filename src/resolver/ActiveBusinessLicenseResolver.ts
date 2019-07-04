@@ -9,9 +9,30 @@ export class ActiveBusinessLicenseResolver {
     private readonly activeBusinessLicenseRepository: Repository<ActiveBusinessLicense> = getRepository(ActiveBusinessLicense)
     private readonly locationRepository: Repository<Location> = getRepository(Location)
 
+    @Query(returns => ActiveBusinessLicense)
+    async activeBusinessLicense(
+        @Args() { bfn }: GetActiveBusinessLicenseArgs
+    ): Promise<ActiveBusinessLicense> {
+        const query = this.activeBusinessLicenseRepository
+            .createQueryBuilder("abl");
+        if (bfn) {
+            query.where("abl.bfn = :bfn", { bfn })
+        }
+        const abl = await query.getOne();
+        const location = await this.locationRepository.findOne({
+            address: normalizeAddress(abl.establishmentAddress),
+        });
+        if (!location) {
+            return abl;
+        }
+        abl.latitude = location.latitude;
+        abl.longitude = location.longitude;
+        return abl;
+    }
+
     @Query(returns => [ActiveBusinessLicense])
     async activeBusinessLicenses(
-        @Args() { licenseType, licenseStatus }: GetActiveBusinessLicenseArgs
+        @Args() { bfn, licenseType, licenseStatus }: GetActiveBusinessLicenseArgs
     ): Promise<ActiveBusinessLicense[]> {
         const query = this.activeBusinessLicenseRepository
             .createQueryBuilder("abl");
