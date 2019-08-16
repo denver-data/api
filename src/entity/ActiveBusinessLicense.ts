@@ -1,8 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
-import { Field, ID, ObjectType } from 'type-graphql'
-import { isNullableType } from 'graphql'
+import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Field, ID, ObjectType } from "type-graphql";
+import { isNullableType } from "graphql";
 
-@Entity('active_business_license')
+@Entity("active_business_license")
 @ObjectType()
 export class ActiveBusinessLicense {
     @Field(type => ID)
@@ -11,50 +11,50 @@ export class ActiveBusinessLicense {
 
     @Field()
     @Column({
-      type: 'text'
+      type: "text"
     })
     bfn: string;
 
     @Field()
     @Column({
-      type: 'varchar',
-      name: 'license_type'
+      type: "varchar",
+      name: "license_type"
     })
     licenseType: string;
 
     @Field()
     @Column({
-      type: 'varchar',
-      name: 'license_status'
+      type: "varchar",
+      name: "license_status"
     })
     licenseStatus: string;
 
     @Field()
     @Column({
-      type: 'varchar',
-      name: 'license_sub_type'
+      type: "varchar",
+      name: "license_sub_type"
     })
     licenseSubType: string;
 
     @Field()
     @Column({
-      type: 'timestamp',
-      name: 'expiration_date'
+      type: "timestamp",
+      name: "expiration_date"
     })
     expirationDate: Date;
 
     @Field({ nullable: true })
     @Column({
-      type: 'text',
+      type: "text",
       nullable: true,
-      name: 'entity_name'
+      name: "entity_name"
     })
     entityName?: string;
 
     @Field()
     @Column({
-      type: 'text',
-      name: 'establishment_address'
+      type: "text",
+      name: "establishment_address"
     })
     establishmentAddress: string;
 

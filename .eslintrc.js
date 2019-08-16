@@ -14,15 +14,16 @@ module.exports = {
   },
   extends: [
     "eslint:recommended",
-    "standard",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
   ],
+  rules: {
+      "quotes": ["error", "double"],
+      "semi": ["error", "always"],
+  },
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly'
   },
-  rules: {
-  }
 }

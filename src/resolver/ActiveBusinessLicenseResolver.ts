@@ -1,8 +1,8 @@
-import { Resolver, Query, Args } from 'type-graphql'
-import { Repository, getRepository } from 'typeorm'
-import { ActiveBusinessLicense } from '../entity/ActiveBusinessLicense'
-import { GetActiveBusinessLicenseArgs } from './args/GetActiveBusinessLicenseArgs'
-import { Location, normalizeAddress } from '../entity/Location'
+import { Resolver, Query, Args } from "type-graphql";
+import { Repository, getRepository } from "typeorm";
+import { ActiveBusinessLicense } from "../entity/ActiveBusinessLicense";
+import { GetActiveBusinessLicenseArgs } from "./args/GetActiveBusinessLicenseArgs";
+import { Location, normalizeAddress } from "../entity/Location";
 
 @Resolver(ActiveBusinessLicense)
 export class ActiveBusinessLicenseResolver {
@@ -36,25 +36,25 @@ export class ActiveBusinessLicenseResolver {
         @Args() { bfn, licenseType, licenseStatus }: GetActiveBusinessLicenseArgs
     ): Promise<ActiveBusinessLicense[]> {
       const query = this.activeBusinessLicenseRepository
-        .createQueryBuilder('abl')
+        .createQueryBuilder("abl");
       if (licenseStatus) {
-        query.where('abl.license_status = :licenseStatus', { licenseStatus })
+        query.where("abl.license_status = :licenseStatus", { licenseStatus });
       }
       if (licenseType) {
-        query.where('abl.license_type = :licenseType', { licenseType })
+        query.where("abl.license_type = :licenseType", { licenseType });
       }
-      const abls = await query.getMany()
+      const abls = await query.getMany();
       return Promise.all(abls
         .map(async abl => {
           const location = await this.locationRepository.findOne({
             address: normalizeAddress(abl.establishmentAddress)
-          })
+          });
           if (!location) {
-            return abl
+            return abl;
           }
-          abl.latitude = location.latitude
-          abl.longitude = location.longitude
-          return abl
-        }))
+          abl.latitude = location.latitude;
+          abl.longitude = location.longitude;
+          return abl;
+        }));
     }
 }
