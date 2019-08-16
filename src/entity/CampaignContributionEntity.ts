@@ -6,91 +6,91 @@ export class CampaignContribution {
     id: number;
 
     @Column({
-        type: "date",
+      type: "date"
     })
     date: Date;
 
     @Column({
-        type: "varchar",
-        name: "campaign_name",
+      type: "varchar",
+      name: "campaign_name"
     })
     campaignName: string;
 
     @Column({
-        type: "varchar",
+      type: "varchar"
     })
     organization: string;
 
     @Column({
-        type: "money",
+      type: "money"
     })
     amount: number;
 
     @Column({
-        type: "varchar",
-        name: "contributor_last_name",
+      type: "varchar",
+      name: "contributor_last_name"
     })
     contributorLastName: string;
 
     @Column({
-        type: "varchar",
-        name: "contributor_middle_name"
+      type: "varchar",
+      name: "contributor_middle_name"
     })
     contributorMiddleName: string;
 
     @Column({
-        type: "varchar",
-        name: "contributor_first_name",
+      type: "varchar",
+      name: "contributor_first_name"
     })
     contributorFirstName: string;
 
     @Column({
-        type: "varchar",
+      type: "varchar"
     })
     employer: string;
 
     @Column({
-        type: "varchar",
+      type: "varchar"
     })
     occupation: string;
 
     @Column({
-        type: "varchar",
+      type: "varchar"
     })
     address: string;
 
     @Column({
-        name: "city_id",
-        type: "int",
+      name: "city_id",
+      type: "int"
     })
     cityId: number;
 
     @Column({
-        name: "state_id",
-        type: "int",
+      name: "state_id",
+      type: "int"
     })
     stateId: number;
 
     @Column({
-        name: "zip_id",
-        type: "int",
+      name: "zip_id",
+      type: "int"
     })
     zipId: number;
 
     @Column({
-        type: "varchar",
-        name: "campaign_type"
+      type: "varchar",
+      name: "campaign_type"
     })
     campaignType: string;
 
     @Column({
-        type: "varchar",
+      type: "varchar"
     })
     race: string;
 
     @Column({
-        type: "varchar",
-        name: "district_number"
+      type: "varchar",
+      name: "district_number"
     })
     districtNumber: string;
 }

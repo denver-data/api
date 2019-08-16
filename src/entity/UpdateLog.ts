@@ -6,7 +6,7 @@ export class UpdateLog {
     id: number;
 
     @Column({
-        type: "text",
+      type: "text"
     })
     entity: string;
 
