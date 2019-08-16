@@ -1,12 +1,12 @@
-import { Entity, Column, CreateDateColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, CreateDateColumn, PrimaryGeneratedColumn } from 'typeorm'
 
-@Entity("update_log")
+@Entity('update_log')
 export class UpdateLog {
     @PrimaryGeneratedColumn()
     id: number;
 
     @Column({
-        type: "text",
+      type: 'text'
     })
     entity: string;
 
