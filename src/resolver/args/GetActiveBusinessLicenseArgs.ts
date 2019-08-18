@@ -10,4 +10,7 @@ export class GetActiveBusinessLicenseArgs {
 
   @Field({ nullable: true })
   licenseType?: string;
+
+  @Field({ nullable: true })
+  bfn?: string;
 }

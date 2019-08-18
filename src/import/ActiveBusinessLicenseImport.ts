@@ -7,7 +7,6 @@ import { Location, normalizeAddress } from "../entity/Location";
 import { ActiveBusinessLicense } from "../entity/ActiveBusinessLicense";
 import { activeBusinessLicenseRowToEntity } from "../mapper/ActiveBusinessLicenseMapper";
 import { UpdateLog } from "../entity/UpdateLog";
-import { rejects } from "assert";
 require("dotenv").config();
 
 const googleMapsClient = require("@google/maps").createClient({
@@ -51,7 +50,7 @@ async function geocodeAddress (address: string): Promise<Location> {
 }
 
 async function geocodeAddresses (addresses: string[]): Promise<any> {
-  return Promise.all(_.uniq(addresses.map(normalizeAddress)).map(await geocodeAddress));
+  return Promise.all(_.uniq(addresses.map(normalizeAddress)).map(async address => await geocodeAddress(address)));
 }
 
 async function activeBusinessLicenseImport (): Promise<number> {
@@ -94,7 +93,7 @@ async function activeBusinessLicenseImport (): Promise<number> {
 }
 
 createConnection()
-  .then(async connection => {
+  .then(async () => {
     const updated = await activeBusinessLicenseImport();
     console.log(`INSERTED ${updated} rows`);
     const updateLogRepo = getRepository(UpdateLog);

@@ -10,8 +10,8 @@ export class ActiveBusinessLicenseResolver {
 
     private readonly locationRepository: Repository<Location> = getRepository(Location)
 
-    @Query(returns => ActiveBusinessLicense)
-    async activeBusinessLicense(
+    @Query(() => ActiveBusinessLicense)
+    async activeBusinessLicense (
         @Args() { bfn }: GetActiveBusinessLicenseArgs
     ): Promise<ActiveBusinessLicense> {
         const query = this.activeBusinessLicenseRepository
@@ -31,9 +31,9 @@ export class ActiveBusinessLicenseResolver {
         return abl;
     }
 
-    @Query(returns => [ActiveBusinessLicense])
-    async activeBusinessLicenses(
-        @Args() { bfn, licenseType, licenseStatus }: GetActiveBusinessLicenseArgs
+    @Query(() => [ActiveBusinessLicense])
+    async activeBusinessLicenses (
+        @Args() { licenseType, licenseStatus }: GetActiveBusinessLicenseArgs
     ): Promise<ActiveBusinessLicense[]> {
       const query = this.activeBusinessLicenseRepository
         .createQueryBuilder("abl");

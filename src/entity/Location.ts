@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, PrimaryColumn } from "typeorm";
+import { Entity, Column, PrimaryColumn } from "typeorm";
 
 @Entity("location_cache")
 export class Location {

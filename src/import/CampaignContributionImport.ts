@@ -10,7 +10,7 @@ export async function campaignContributionImport (): Promise<number> {
     const request = https.get("https://www.denvergov.org/media/gis/DataCatalog/campaign_finance_reports/csv/contributions.csv");
     const entitySaves = [];
     let rowCount = 0;
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve): void => {
       request.on("response", (incomingMessage) => {
         const csvStream = incomingMessage.pipe(
           Papa.parse(

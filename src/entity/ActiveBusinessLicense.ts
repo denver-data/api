@@ -1,11 +1,10 @@
 import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 import { Field, ID, ObjectType } from "type-graphql";
-import { isNullableType } from "graphql";
 
 @Entity("active_business_license")
 @ObjectType()
 export class ActiveBusinessLicense {
-    @Field(type => ID)
+    @Field(() => ID)
     @PrimaryGeneratedColumn()
     id: number;
 

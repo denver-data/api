@@ -1,10 +1,9 @@
 import "reflect-metadata";
-import * as _ from "lodash";
-import { createConnection, createConnections } from "typeorm";
+import { createConnections } from "typeorm";
 
 import { Location } from "../entity/Location";
 
-async function run () {
+async function run (): Promise<void> {
   const [herokuDb, localDb] = await createConnections([
     {
       name: "heroku",
