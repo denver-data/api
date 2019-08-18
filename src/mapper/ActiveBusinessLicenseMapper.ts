@@ -11,7 +11,7 @@ export function activeBusinessLicenseRowToEntity (row): ActiveBusinessLicense {
   entity.licenseType = row["LICENSE_TYPE"];
   entity.licenseStatus = row["LICENSE_STATUS"];
   entity.licenseSubType = row["LICENSE_SUB_TYPE"];
-  entity.expirationDate = new Date(row["EXPIRATION_DATE"]);
+  entity.expirationDate = row["EXPIRATION_DATE"] ? new Date(row["EXPIRATION_DATE"]) : null;
   entity.entityName = row["ENTITY_NAME"];
   entity.establishmentAddress = row["ESTABLISHMENT_ADDRESS"];
   return entity;

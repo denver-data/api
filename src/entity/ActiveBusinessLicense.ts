@@ -31,14 +31,15 @@ export class ActiveBusinessLicense {
     @Field()
     @Column({
       type: "varchar",
-      name: "license_sub_type"
+      name: "license_sub_type",
     })
     licenseSubType: string;
 
     @Field()
     @Column({
       type: "timestamp",
-      name: "expiration_date"
+      name: "expiration_date",
+      nullable: true,
     })
     expirationDate: Date;
 
