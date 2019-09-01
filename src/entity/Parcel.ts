@@ -4,9 +4,15 @@ import { Field, ID, ObjectType } from "type-graphql";
 @Entity("parcel")
 @ObjectType()
 export class Parcel {
-
     @Field(() => ID)
     @PrimaryGeneratedColumn()
+    id: number;
+
+    @Field()
+    @Column({
+        nullable: true,
+        type: "text",
+    })
     PIN: string;
 
     @Field()

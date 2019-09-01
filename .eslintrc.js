@@ -19,8 +19,8 @@ module.exports = {
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
   ],
   rules: {
-      "quotes": ["error", "double"],
-      "semi": ["error", "always"],
+    "quotes": ["error", "double"],
+    "semi": ["error", "always"],
   },
   globals: {
     Atomics: 'readonly',
