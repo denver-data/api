@@ -91,8 +91,6 @@ async function run() {
         await createConnection()
         const updated = await activeBusinessLicenseImport();
         console.log(`INSERTED ${updated} rows`);
-        const addresses = (await getRepository(ActiveBusinessLicense).find()).map(abl => abl.establishmentAddress);
-        await geocodeAddresses(addresses);
     }
     catch (error) {
         console.error(error);
