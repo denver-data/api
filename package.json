@@ -28,6 +28,7 @@
       "start": "npm run db:migrate && ts-node src/api/index.ts",
       "import:active-business-license": "ts-node src/import/ActiveBusinessLicenseImport.ts",
       "import:parcel": "node -r ts-node/register --max-old-space-size=4096 src/import/ParcelImport.ts",
+      "import:real-property-sales-and-transfers": "node -r ts-node/register --max-old-space-size=4096 src/import/RealPropertySaleAndTransferImporMappert.ts",
       "db:create-migration": "typeorm migration:create -n ",
       "db:migrate": "ts-node ./node_modules/typeorm/cli.js migration:run",
       "db:rollback": "ts-node ./node_modules/typeorm/cli.js migration:revert"

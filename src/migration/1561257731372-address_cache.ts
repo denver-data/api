@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
 export class addressCache1561257731372 implements MigrationInterface {
-  public async up (queryRunner: QueryRunner): Promise<any> {
+  public async up(queryRunner: QueryRunner): Promise<any> {
     await queryRunner.createTable(
       new Table({
         name: "location_cache",
@@ -25,7 +25,7 @@ export class addressCache1561257731372 implements MigrationInterface {
     );
   }
 
-  public async down (queryRunner: QueryRunner): Promise<any> {
+  public async down(queryRunner: QueryRunner): Promise<any> {
     await queryRunner.dropTable("location_cache");
   }
 }
