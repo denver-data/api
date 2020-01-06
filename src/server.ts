@@ -1,10 +1,11 @@
 import { ApolloServer } from "apollo-server-koa";
 import * as Koa  from "koa";
+import * as cors from "@koa/cors";
 import { merge } from "lodash";
 
-import { sitePlanSchema } from "./sitePlan";
+import { sitePlanSchema } from "./sitePlanSchema";
 
-const PORT = process.env.PORT ?? 3000;
+const PORT = process.env.PORT ?? 4000;
 
 (async () => {
   const schemas = await Promise.all([
@@ -15,6 +16,7 @@ const PORT = process.env.PORT ?? 3000;
     resolvers: merge(...schemas.map(s => s.resolvers)),
   });
   const app = new Koa();
+  app.use(cors());
   apolloServer.applyMiddleware({ app });
   app.use(ctx => {
     ctx.body = `This is the Denver Data API.`;

@@ -1,4 +1,4 @@
-import { getData, createTypeDef, createResolvers } from './arcgisClient';
+import { createTypeDef, createResolvers } from './arcgisClient';
 
 const TYPE = "ODC_PLAN_SITEDEVPLANS_A/FeatureServer/105";
 const NAME = "SitePlan";
