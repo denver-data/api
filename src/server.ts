@@ -2,13 +2,13 @@ import { ApolloServer } from "apollo-server-koa";
 import * as Koa  from "koa";
 import { merge } from "lodash";
 
-import { createSchema } from "./sitePlan";
+import { sitePlanSchema } from "./sitePlan";
 
 const PORT = process.env.PORT ?? 3000;
 
 (async () => {
   const schemas = await Promise.all([
-    createSchema()
+    sitePlanSchema()
   ]);
   const apolloServer = new ApolloServer({
     typeDefs: [`type Query { _empty: String }`, ...schemas.map(s => s.typeDef)],

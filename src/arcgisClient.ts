@@ -1,6 +1,6 @@
 import got from "got";
 
-const BASE_URL = "https://services1.arcgis.com/zdB7qR0BtYrg0Xpl/ArcGIS/rest/services/";
+const BASE_URL = "https://services1.arcgis.com/zdB7qR0BtYrg0Xpl/ArcGIS/rest/services";
 
 //INFO: https://esri.github.io/spatial-framework-for-hadoop/json/com/esri/json/EsriFieldType.html
 //INFO: https://graphql.org/learn/schema/#scalar-types
@@ -23,15 +23,7 @@ const esriFieldTypeToGraphQLType = (esriType: string) => {
   }
 };
 
-export const getMetadata = async (type: string) => {
-  const response = await got.get(`${BASE_URL}${type}?f=json`)
-  const responseJson = JSON.parse(response.body);
-  return {
-    fields: responseJson.fields.map(f => [f.name, esriFieldTypeToGraphQLType(f.type)]),
-  }
-};
-
-export const createTypeDef = async (name: string, pluralName: string, type: string) => {
+export const createTypeDef = async (type: string, name: string, namePlural: string) => {
   const metadata = await getMetadata(type);
   return `
     type ${name} {
@@ -44,18 +36,45 @@ export const createTypeDef = async (name: string, pluralName: string, type: stri
     }
 
     extend type Query {
-      ${pluralName} (count: Int, offset: Int, sortBy: [${name}_column], filterBy: [String]): [${name}]
+      ${namePlural} (count: Int, offset: Int, sortBy: [${name}_column], filterBy: [String]): [${name}]
     }
   `;
 }
 
-const transformSortByColumn = (sortByColumn) => sortByColumn.replace(/_ASC$/, " ASC").replace(/_DESC$/, " DESC");
+export const createResolvers = (type: string, namePlural: string) => {
+  return {
+    Query: {
+      [namePlural]: async (_obj, args) => {
+        return await getData(type, args.count, args.offset, args.sortBy, args.filterBy)
+      },
+    },
+  };
+};
 
-export const get = async (type: string, count: number = 50, offset: number = 0, sortBy: string[] = [], filterBy: string[] = []) => {
-  const query = `OBJECTID IS NOT NULL`;
-  const returnGeometry = false;
-  const url = `${BASE_URL}/${type}/query?where=${query}&outFields=*&returnGeometry=${returnGeometry}&returnDistinctValues=true&orderByFields=${sortBy.map(transformSortByColumn).join(",")}&resultRecordCount=${count}&resultOffset=${offset}&f=json`;
-  const response = await got.get(url);
-  const responseJson = JSON.parse(response.body);
-  return responseJson.features.map(f => f.attributes);
+const transformSortByColumn = (sortByColumn) =>
+  sortByColumn.replace(/_ASC$/, " ASC").replace(/_DESC$/, " DESC");
+
+export const getMetadata = async (type: string) => {
+  try {
+    const response = await got.get(`${BASE_URL}/${type}?f=json`)
+    const responseJson = JSON.parse(response.body);
+    return {
+      fields: responseJson.fields.map(f => [f.name, esriFieldTypeToGraphQLType(f.type)]),
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getData = async (type: string, count: number = 50, offset: number = 0, sortBy: string[] = [], filterBy: string[] = []) => {
+  try {
+    const query = `OBJECTID IS NOT NULL`;
+    const returnGeometry = false;
+    const url = `${BASE_URL}/${type}/query?where=${query}&outFields=*&returnGeometry=${returnGeometry}&returnDistinctValues=true&orderByFields=${sortBy.map(transformSortByColumn).join(",")}&resultRecordCount=${count}&resultOffset=${offset}&f=json`;
+    const response = await got.get(url);
+    const responseJson = JSON.parse(response.body);
+    return responseJson.features.map(f => f.attributes);
+  } catch (error) {
+    console.error(error);
+  }
 }

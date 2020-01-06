@@ -1,20 +1,12 @@
-import { get, createTypeDef } from './arcgisClient';
+import { getData, createTypeDef, createResolvers } from './arcgisClient';
 
 const TYPE = "ODC_PLAN_SITEDEVPLANS_A/FeatureServer/105";
+const NAME = "SitePlan";
+const NAME_PLURAL = "SitePlans";
 
-const createResolvers = () => {
+export const sitePlanSchema = async () => {
   return {
-    Query: {
-      SitePlans: async (_obj, args) => {
-        return await get(TYPE, args.count, args.offset, args.sortBy, args.filterBy)
-      },
-    },
-  };
-};
-
-export const createSchema = async () => {
-  return {
-    typeDef: await createTypeDef("SitePlan", "SitePlans", TYPE),
-    resolvers: createResolvers(),
+    typeDef: await createTypeDef(TYPE, NAME, NAME_PLURAL),
+    resolvers: createResolvers(TYPE, NAME_PLURAL),
   };
 };
