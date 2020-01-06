@@ -2,7 +2,7 @@ import got from "got";
 
 const BASE_URL = "https://services1.arcgis.com/zdB7qR0BtYrg0Xpl/ArcGIS/rest/services";
 
-//INFO: https://esri.github.io/spatial-framework-for-hadoop/json/com/esri/json/EsriFieldType.html
+//INFO: https://developers.arcgis.com/documentation/common-data-types/field.htm
 //INFO: https://graphql.org/learn/schema/#scalar-types
 const esriFieldTypeToGraphQLType = (esriType: string) => {
   switch (esriType) {
