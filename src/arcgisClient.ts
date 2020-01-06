@@ -37,16 +37,20 @@ export const createTypeDef = async (type: string, name: string, namePlural: stri
 
     extend type Query {
       ${namePlural} (count: Int, offset: Int, sortBy: [${name}_column], filterBy: [String]): [${name}]
+      ${name}Count (filterBy: [String]): Int
     }
   `;
 }
 
-export const createResolvers = (type: string, namePlural: string) => {
+export const createResolvers = (type: string, name: string, namePlural: string) => {
   return {
     Query: {
       [namePlural]: async (_obj, args) => {
         return await getData(type, args.count, args.offset, args.sortBy, args.filterBy)
       },
+      [`${name}Count`]: async (_obj, args) => {
+        return await getCount(type, args.filterBy);
+      }
     },
   };
 };
@@ -65,6 +69,18 @@ export const getMetadata = async (type: string) => {
     console.error(error);
   }
 };
+
+export const getCount = async (type: string, filterBy: string[] = []) => {
+  try {
+    const query = `OBJECTID IS NOT NULL`;
+    const url = `${BASE_URL}/${type}/query?where=${query}&returnCountOnly=true&returnDistinctValues=true&f=json`;
+    const response = await got.get(url);
+    const responseJson = JSON.parse(response.body);
+    return responseJson.count;
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 export const getData = async (type: string, count: number = 50, offset: number = 0, sortBy: string[] = [], filterBy: string[] = []) => {
   try {

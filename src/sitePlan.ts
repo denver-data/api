@@ -7,6 +7,6 @@ const NAME_PLURAL = "SitePlans";
 export const sitePlanSchema = async () => {
   return {
     typeDef: await createTypeDef(TYPE, NAME, NAME_PLURAL),
-    resolvers: createResolvers(TYPE, NAME_PLURAL),
+    resolvers: createResolvers(TYPE, NAME, NAME_PLURAL),
   };
 };
