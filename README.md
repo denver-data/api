@@ -1,4 +1,4 @@
-# Database, CSV importer, and GraphQL for http://api.denverdata.org/
+# API at http://api.denverdata.org/
 
 ![Travis (.org)](https://img.shields.io/travis/denver-data/api/master.svg?style=for-the-badge)
 
@@ -6,22 +6,14 @@
 
 Prereqs:
 * Node 8+
-* PostgreSQL
-* A configured `ormconfig.json`.
+* yarn
 
 ```sh
-npm install
-npm run db:migrate
+yarn
 ```
 
-## Importing Data
+## Running the Server
 
 ```sh
-npm run import:active-business-license
-```
-
-## Running an Apollo Server
-
-```sh
-npm start
+yarn start
 ```

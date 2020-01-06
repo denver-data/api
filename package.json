@@ -1,44 +1,23 @@
 {
-   "name": "denverdata-db",
-   "description": "The data behind denverdata.org",
-   "version": "0.0.1",
+   "name": "denverdata-api",
+   "description": "The API behind denverdata.org",
+   "version": "1.0.0",
    "repository": "https://github.com/denver-data/api",
    "license": "MIT",
-   "dependencies": {
-      "@google/maps": "^0.5.5",
-      "@types/csv-parse": "^1.2.2",
-      "@types/google__maps": "^0.5.6",
-      "@types/graphql": "^14.2.3",
-      "@types/lodash": "^4.14.137",
-      "@types/node": "^12.7.2",
-      "apollo-server": "^2.8.1",
-      "axios": "^0.19.0",
-      "csv-parse": "^4.4.5",
-      "dotenv": "^8.1.0",
-      "graphql": "^14.4.2",
-      "lodash": "^4.17.15",
-      "pg": "^7.12.1",
-      "reflect-metadata": "^0.1.10",
-      "ts-node": "^8.3.0",
-      "type-graphql": "^0.17.4",
-      "typeorm": "^0.2.18",
-      "typescript": "^3.5.3"
-   },
    "scripts": {
-      "start": "npm run db:migrate && ts-node src/api/index.ts",
-      "import:active-business-license": "ts-node src/import/ActiveBusinessLicenseImport.ts",
-      "db:create-migration": "typeorm migration:create -n ",
-      "db:migrate": "ts-node ./node_modules/typeorm/cli.js migration:run",
-      "db:rollback": "ts-node ./node_modules/typeorm/cli.js migration:revert"
+      "start": "ts-node src/server.ts",
+      "dev": "nodemon -e js,ts,json,gql"
+   },
+   "dependencies": {
+      "apollo-server-koa": "^2.9.15",
+      "got": "^10.2.1",
+      "graphql": "^14.5.8",
+      "koa": "^2.11.0",
+      "lodash": "^4.17.15",
+      "ts-node": "^8.5.4",
+      "typescript": "^3.7.4"
    },
    "devDependencies": {
-      "@typescript-eslint/eslint-plugin": "^2.0.0",
-      "@typescript-eslint/parser": "^2.0.0",
-      "eslint": "^6.1.0",
-      "eslint-config-standard": "^13.0.1",
-      "eslint-plugin-import": "^2.18.2",
-      "eslint-plugin-node": "^9.1.0",
-      "eslint-plugin-promise": "^4.2.1",
-      "eslint-plugin-standard": "^4.0.0"
+      "nodemon": "^2.0.2"
    }
 }
